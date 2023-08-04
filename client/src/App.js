@@ -1,7 +1,7 @@
 import './App.css';
 import NavBar from './components/NavBar/NavBar';
 import {Landing, Home, Detail, Form} from './views'
-import {Route, Switch, useLocation} from 'react-router-dom';
+import {Route, Routes, useLocation} from 'react-router-dom';
 
 function App() {
   const { pathname } = useLocation();
@@ -9,20 +9,12 @@ function App() {
     <div className="App">
       {pathname !== "/" && <NavBar />}
       
-<Switch>
-      <Route exact path="/" > 
-        <Landing></Landing>
-      </Route>
-      <Route path="/home" > 
-        <Home></Home>
-      </Route>
-      <Route path="/detail/:id" > 
-        <Detail></Detail>
-      </Route>
-      <Route path="/create" > 
-        <Form></Form>
-      </Route>
-      </Switch>
+<Routes>
+      <Route exact path="/" element={<Landing />}/>
+      <Route path="/home" element={<Home />}/>
+      <Route path="/detail/:id" element={<Detail />}/>
+      <Route path="/create" element={<Form />}/>
+      </Routes>
       
     </div>
   );

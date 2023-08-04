@@ -2,7 +2,7 @@ import Card from "../Card/Card"
 import style from "./CardsContainer.module.css"
 import { useSelector } from "react-redux"
 const CardsContainer = () =>{
-const cards = useSelector(state=>state.cards)
+const cards = useSelector(state=>state.allVideogames)
 
     return (
     <div className={style.container}> {cards.map(card => {
