@@ -1,10 +1,26 @@
-
-
+import NavBar from "./components/NavBar/Navbar";
+import { Landing, Home, Detail, Form } from "./views";
+import { Route, Routes, useLocation } from "react-router-dom";
 
 function App() {
-  //const { pathname } = useLocation();
+  const { pathname } = useLocation();
   return (
-    <h1>TODO OK</h1>
+    <div className="App">
+      {pathname !== "/" && <NavBar/>}
+      
+      <Routes>
+        
+      <Route exact path="/"
+          element={<Landing/>} />
+        
+        <Route path="/home"
+          element={<Home/>} />
+          <Route path="/detail/:id"
+          element={<Detail/>} />
+          <Route path="/create"
+          element={<Form/>} />
+      </Routes>
+    </div>
   );
 }
 
