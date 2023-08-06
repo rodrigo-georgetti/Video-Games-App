@@ -1,7 +1,16 @@
+import { useNavigate } from "react-router-dom"
+
 const Landing = () =>{
-    return (<>
-    <h1>Vista Landing</h1>
-    </>
+const navigate = useNavigate()
+const access = ()=>{
+    navigate("/home")
+}
+
+
+    return (<div>
+        <h1>Epic Plays</h1>
+        <button onClick={access}>comenzar</button>
+        </div>
     )
 }
 

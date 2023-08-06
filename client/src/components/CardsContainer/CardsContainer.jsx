@@ -9,7 +9,7 @@ const CardsContainer = () =>{
         <div className={style.container}> 
             {allVideogames.map(videogame =>{
                 return <Card
-                
+                id={videogame.id}
                 name= {videogame.name}
                 />
             })}
