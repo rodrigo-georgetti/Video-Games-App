@@ -1,7 +1,7 @@
 const {Videogame, Genres, Platforms} = require('../db')
 const URL = "https://api.rawg.io/api/games/"
 const axios = require('axios')
-const cleanVideogameId = require('../utils/cleanIdUtils')
+const cleanVideogameId = require('../helpers/cleanIdUtils')
 const {API_KEY} = process.env
 
 const getVideogamesById= async (id, searchSource)=>{
