@@ -1,44 +1,51 @@
-const {Platforms} = require('../db')
-const axios = require("axios");
+const { Platforms } = require('../db');
+const axios = require('axios');
 const { API_KEY } = process.env;
-const {URL_VIDEOGAMES} = require('../helpers/urlHelpers')
-const platformsAuxArray = []
+const { URL_VIDEOGAMES } = require('../helpers/urlHelpers');
 
 const getAllPlatforms = async () => {
-    
-if (await Platforms.count()===0){
-  
-   const allGames = [];
-  // const [response1, response2] = await Promise.all([
-  //   
-  // ]);
+  if (await Platforms.count() === 0) {
+    const allGames = [];
+    const totalPages = 150;
+    const pageSize = 40;
+    const apiRequests = [];
 
-  for (let pageNumber = 1; pageNumber <= 10; pageNumber++) {
-    try {
-      const response = await axios.get(`${URL_VIDEOGAMES}?key=${API_KEY}&page=${pageNumber}&page_size=40`);
-      const gamesOnPage = response.data.results;
-      allGames.push(...gamesOnPage);
-    } catch (error) {
-      console.error(`Error fetching data from page ${pageNumber}:`, error.message);
+    for (let pageNumber = 50; pageNumber <= totalPages; pageNumber++) {
+      apiRequests.push(axios.get(`${URL_VIDEOGAMES}?key=${API_KEY}&page=${pageNumber}&page_size=${pageSize}`));
     }
-  }
-  
-  allGames.forEach((element) => {
-element.platforms.forEach((object)=>{
-  platformsAuxArray.push({name:object.platform.name})
-})
-  })
-  
-  const allPlatforms = [...new Set(platformsAuxArray.map(element => JSON.stringify(element)))].map(object => JSON.parse(object))
-  await Platforms.bulkCreate(allPlatforms)
-      return Platforms.findAll({model : Platforms,
-        attributes:["name"]})
 
-} else {
-  const platformsQuery = await Platforms.findAll({model :Platforms,
-    attributes:["name"]})
-  return platformsQuery
-}
+    try {
+      const responses = await Promise.all(apiRequests);
+      responses.forEach((response) => {
+        const gamesOnPage = response.data.results;
+        allGames.push(...gamesOnPage);
+      });
+    } catch (error) {
+      console.error('Error fetching data:', error.message);
+    }
+
+    const platformsAuxArray = [];
+    allGames.forEach((element) => {
+      element.platforms.forEach((object) => {
+        platformsAuxArray.push({ name: object.platform.name });
+      });
+    });
+
+    const allPlatforms = [...new Set(platformsAuxArray.map((element) => JSON.stringify(element)))].map((object) => JSON.parse(object));
+    
+    await Platforms.bulkCreate(allPlatforms);
+    
+    const platformNames = await Platforms.findAll({
+      attributes: ['name']
+    });
+
+    return platformNames;
+  } else {
+    const platformsQuery = await Platforms.findAll({
+      attributes: ['name']
+    });
+    return platformsQuery;
+  }
 };
 
-module.exports = {getAllPlatforms}
+module.exports = { getAllPlatforms };
