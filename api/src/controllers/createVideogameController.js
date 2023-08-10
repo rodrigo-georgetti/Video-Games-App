@@ -32,5 +32,3 @@ return newVideogame
 
 }
  module.exports = {createVideogame}
-
- //ver imagen random o seleccion de imagen
