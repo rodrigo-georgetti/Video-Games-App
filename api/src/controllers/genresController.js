@@ -10,9 +10,11 @@ const getAllGenres = async () => {
       apiGenres.data.results.forEach((element) => {
          return genresAuxArray.push({ name: element.name })})
       await Genres.bulkCreate(genresAuxArray)
-      return Genres.findAll()
+      return Genres.findAll({model : Genres,
+        attributes:["name"]})
     } else {
-      const genresQuery = await Genres.findAll()
+      const genresQuery = await Genres.findAll({model : Genres,
+        attributes:["name"]})
       return genresQuery
     }
 };
