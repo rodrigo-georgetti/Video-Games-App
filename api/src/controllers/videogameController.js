@@ -1,31 +1,43 @@
-// const {Videogame, Genres, Platforms} = require('../db')
-// const axios = require('axios')
-// const URL = "https://api.rawg.io/api/games"
-// const {API_KEY} = process.env
-// const cleanVideogames = require('../helpers/formatVideogameByIdHelpersaaaaaaaaaaaa')
-// const {Op} = require('sequelize')
+const {Videogame, Genres, Platforms} = require('../db')
+const axios = require('axios')
+const formatVideogames = require('../helpers/formatVideogamesHelpers')
+const URL_VIDEOGAMES = "https://api.rawg.io/api/games"
+const {API_KEY} = process.env
 
+    const getAllVideogames = async () =>{
+      const dataBaseVideogame = await Videogame.findAll({
+        include:[{model : Genres,
+          attributes:["name"],
+          through: { attributes: []}},
+          {model : Platforms,
+            attributes:["name"],
+            through: { attributes: []}}]
+        ,attributes: {
+          exclude: ["description"]
+        }})
+
+        
+        const apiVideogameRaw = [];
+        const totalPages = 4;
+        const pageSize = 25;
+        const apiRequests = [];
     
-
-
-
+        for (let pageNumber = 1; pageNumber <= totalPages; pageNumber++) {
+          apiRequests.push(axios.get(`${URL_VIDEOGAMES}?key=${API_KEY}&page=${pageNumber}&page_size=${pageSize}`));
+        }
     
+        try {
+          const responses = await Promise.all(apiRequests);
+          responses.forEach((response) => {
+            const gamesOnPage = response.data.results;
+            apiVideogameRaw.push(...gamesOnPage);
+          });
+        } catch (error) {
+          console.error('Error fetching data:', error.message);
+        }
 
-//     const getAllVideogames = async () =>{
-//       const dataBaseVideogameRaw = await Videogame.findAll({
-//         include:[{model : Genres,
-//           attributes:["name"],
-//           through: { attributes: []}},
-//           {model : Platforms,
-//             attributes:["name"],
-//             through: { attributes: []}}]
-//         ,attributes: {
-//           exclude: ["description"]
-//         }})
-//  const apiVideogameRaw = (await axios.get(`${URL}?key=${API_KEY}`)).data.results;
-//  const apiVideogame = cleanVideogames(apiVideogameRaw)
-// return [...dataBaseVideogameRaw, ...apiVideogame]
-//     }
+ const apiVideogame = formatVideogames(apiVideogameRaw)
+return [...dataBaseVideogame, ...apiVideogame]
+    }
 
-
-//  module.exports = {searchVideogamesByName, getAllVideogames}
+ module.exports = {getAllVideogames}

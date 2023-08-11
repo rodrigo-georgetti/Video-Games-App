@@ -1,4 +1,5 @@
 const {searchVideogamesByName} = require('../controllers/videogameByName') 
+const {getAllVideogames} = require('../controllers/videogameController')
   const getVideogamesHandler = async (req, res) => {
     
 try {
