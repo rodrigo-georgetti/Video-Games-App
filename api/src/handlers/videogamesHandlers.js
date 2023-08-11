@@ -1,7 +1,8 @@
-const { searchVideogamesByName, getAllVideogames} = require("../controllers/videogameController");  
+const {searchVideogamesByName} = require('../controllers/videogameByName') 
   const getVideogamesHandler = async (req, res) => {
-    const {name} = req.query
+    
 try {
+  const {name} = req.query
   const typeSearch = name ? await searchVideogamesByName(name) : await getAllVideogames ()
   res.status(200).json(typeSearch)
 } catch (error) {

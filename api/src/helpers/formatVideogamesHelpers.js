@@ -1,6 +1,6 @@
 
-const cleanVideogames =(array)=>{
-    const cleaned = array.map((object)=>{
+const formatVideogames =(array)=>{
+    const apiVideogames = array.map((object)=>{
        return {
           id: object.id,
            name:object.name,
@@ -12,7 +12,7 @@ const cleanVideogames =(array)=>{
            platforms: object.platforms.map((element) => ({ name: element.platform.name }))
        }
     })
-    return cleaned
+    return apiVideogames
  }
 
- module.exports = cleanVideogames
+ module.exports = formatVideogames

@@ -1,5 +1,5 @@
 const formatVideogameId = (object) =>{
-    const apiVideogame = {
+    const apiVideogameById = {
         id: object.id,
         name: object.name,
         description: object.description,
@@ -10,7 +10,7 @@ const formatVideogameId = (object) =>{
 genres: object.genres.map((element) => ({ name: element.name })),
 platforms: object.platforms.map((element) => ({ name: element.platform.name }))
       };
-      return apiVideogame
+      return apiVideogameById
 }
 
 
