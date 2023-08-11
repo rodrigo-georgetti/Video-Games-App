@@ -9,7 +9,7 @@ const cleanVideogames =(array)=>{
            rating:object.rating,
            created: false,
            genres: object.genres.map((element) => ({ name: element.name })),
-platforms: object.platforms.map((element) => ({ name: element.platform.name }))
+           platforms: object.platforms.map((element) => ({ name: element.platform.name }))
        }
     })
     return cleaned

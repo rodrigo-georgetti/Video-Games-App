@@ -1,8 +1,8 @@
 const {Videogame, Genres, Platforms} = require('../db')
-const URL = "https://api.rawg.io/api/games/"
 const axios = require('axios')
-const cleanVideogameId = require('../helpers/cleanIdUtils')
 const {API_KEY} = process.env
+const URL_VIDEOGAMES_BY_ID = "https://api.rawg.io/api/games/"
+const formatVideogameId = require('../helpers/formatVideogameByIdHelpers')
 
 const getVideogamesById= async (id, searchSource)=>{
   if (searchSource === "db"){
@@ -16,13 +16,9 @@ const getVideogamesById= async (id, searchSource)=>{
       })
       return dbVideogame
   }  else {
-    const apiVideogameRaw = (await axios.get(`${URL}${id}?key=${API_KEY}`)).data;
-    const apiVideogame = cleanVideogameId(apiVideogameRaw)
-  
+    const apiVideogameRaw = (await axios.get(`${URL_VIDEOGAMES_BY_ID}${id}?key=${API_KEY}`)).data;
+    const apiVideogame = formatVideogameId(apiVideogameRaw)
     return apiVideogame
   }
-  
-  
-  
     }
     module.exports = {getVideogamesById}

@@ -1,4 +1,4 @@
-const cleanVideogameId = (object) =>{
+const formatVideogameId = (object) =>{
     const apiVideogame = {
         id: object.id,
         name: object.name,
@@ -14,4 +14,4 @@ platforms: object.platforms.map((element) => ({ name: element.platform.name }))
 }
 
 
- module.exports = cleanVideogameId
+ module.exports = formatVideogameId

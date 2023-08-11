@@ -2,7 +2,7 @@ const {Videogame, Genres, Platforms} = require('../db')
 const axios = require('axios')
 const URL = "https://api.rawg.io/api/games"
 const {API_KEY} = process.env
-const cleanVideogames = require('../helpers/cleanVideogameUtils')
+const cleanVideogames = require('../helpers/formatVideogameByIdHelpersaaaaaaaaaaaa')
 const {Op} = require('sequelize')
 
     const searchVideogamesByName = async (name) =>{
