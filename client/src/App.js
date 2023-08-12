@@ -1,5 +1,6 @@
 import NavBar from "./components/NavBar/Navbar";
-import { Landing, Home, Detail, Form } from "./views";
+import { Landing, Home, Detail, Form, NotFound} from "./views";
+
 import { Route, Routes, useLocation } from "react-router-dom";
 
 function App() {
@@ -12,13 +13,14 @@ function App() {
         
       <Route exact path="/"
           element={<Landing/>} />
-        
+        <Route path="*" element={<NotFound />} />
         <Route path="/home"
           element={<Home/>} />
           <Route path="/detail/:id"
           element={<Detail/>} />
           <Route path="/create"
           element={<Form/>} />
+
       </Routes>
     </div>
   );
