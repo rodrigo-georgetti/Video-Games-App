@@ -9,6 +9,7 @@ const access = ()=>{
 
     return (<div>
         <h1>Epic Plays</h1>
+        {/* imagen de landing */}
         <button onClick={access}>comenzar</button>
         </div>
     )
