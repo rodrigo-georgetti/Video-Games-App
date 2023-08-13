@@ -1,20 +1,24 @@
 import axios from "axios"
-import React ,{ useState } from "react"
+import React ,{ useState, useEffect} from "react"
 import validate from "./validate"
+import { useDispatch, useSelector} from "react-redux"
+
+import { getGenres, getPlatforms } from "../../redux/actions"
 
 
-//import { useNavigate } from "react-router-dom";
+
 
 const Form = () =>{
-//     const navigate = useNavigate();
 
-//   function handleBackClick() {
-//     navigate(-1);
-//   }
+const dispatch = useDispatch();
+
+useEffect(() => {
+    
+    dispatch(getGenres())
+    dispatch(getPlatforms())
+}, [dispatch])
 	
-	
-	
-	
+
     const [form, setForm] = useState({
         name: "",
         description:"",
@@ -35,7 +39,8 @@ const Form = () =>{
         platforms:"",
 
     })
-
+    const [selectedGenres, setSelectedGenres] = useState([]);
+    const [selectedPlatforms, setSelectedPlatforms] = useState([]);
 const changeHandler = (event)=>{
 const property = event.target.name
 const value = event.target.value
@@ -43,29 +48,45 @@ setErrors(validate({...form, [property]:value}))
 setForm({...form, [property]:value})
 }
 
+const handleGenresChange = (event) => {
+    const selectedOptions = event.target.value; //opciones del select
+    
+    const uniqueOptions = new Set(selectedGenres); //Set con opciones (sin repetir)
+    uniqueOptions.add(selectedOptions); //agrego al Set cada opcion
+    console.log("Selected Genres:", selectedOptions);
+    setSelectedGenres(Array.from(uniqueOptions));//valido que se puedan agregar hasta 5
+};
+const handlePlatformsChange = (event) => {
+    const selectedOptions = event.target.value; //opciones del select
+    
+    const uniqueOptions = new Set(selectedPlatforms); //Set con opciones (sin repetir)
+    uniqueOptions.add(selectedOptions); //agrego al Set cada opcion
+    console.log("Selected PLatforms:", selectedOptions)
+    setSelectedPlatforms(Array.from(uniqueOptions));//valido que se puedan agregar hasta 5
+};
 
-
-const submitHandler = (event)=>{
+const SubmitHandler = (event)=>{
 event.preventDefault()
-console.log(form)
+if((Object.keys(errors).length === 0) & (selectedPlatforms.length!==0) & (selectedGenres.length!==0)){
 const newDog = {
     name: form.name,
     description: form.description,
     background_image: form.background_image,
     released: form.released,
     rating: parseFloat(form.rating),
-    genres: form.genres,
-    platforms:form.platforms
+    genres: selectedGenres,
+    platforms:selectedPlatforms
 }
-
 
 axios.post("http://localhost:3001/videogames", newDog)
 .then(res=>alert(res))
-.catch(error=>alert(error))
+.catch(error=>alert(error))}
 }
+const genres = useSelector(state => state.genres)//array con todos los temperamentos de la DB
+const platforms = useSelector(state => state.platforms)
 
     return (
-        <form onSubmit={submitHandler} >
+        <form onSubmit={SubmitHandler} >
             {/* <button onClick={handleBackClick}>Go Back</button> */}
         <div> 
             <label>Name: </label>
@@ -96,16 +117,33 @@ axios.post("http://localhost:3001/videogames", newDog)
             <input type="text" value={form.rating} onChange={changeHandler} name="rating" ></input>
             <span>{errors.rating1 ? <p>{errors.rating1}</p> : <p>{errors.rating2}</p>}</span>
         </div>
-        <div> 
-            <label>Genres: </label>
-            <input type="text" value={form.genres} onChange={changeHandler} name="genres" ></input>
-        </div>
-        <div> 
+        <div>
+        <select multiple value={selectedGenres} onChange={handleGenresChange}>
+    {genres && genres.map((genre, index) => (
+        <option key={index} value={genre.name}>
+            {genre.name}
+        </option>
+    ))}
+</select>
+            <p>SELECTED GENRES: {selectedGenres.join(', ')}</p>
+            </div>
+        
+            <div>
+        <select multiple value={selectedPlatforms} onChange={handlePlatformsChange}>
+    {platforms && platforms.map((platform, index) => (
+        <option key={index} value={platform.name}>
+            {platform.name}
+        </option>
+    ))}
+</select>
+            <p>SELECTED PLATFORMS: {selectedPlatforms.join(', ')}</p>
+            </div>
+        
+
+        {/* <div> 
             <label>Platforms: </label>
             <input type="text" value={form.platforms} onChange={changeHandler} name="platforms" ></input>
-        </div>
-
-        
+        </div> */}
         <button type="submit" >SUBMIT</button>
         </form>
     )
