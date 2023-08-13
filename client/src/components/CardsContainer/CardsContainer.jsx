@@ -11,6 +11,9 @@ const CardsContainer = () =>{
                 return <Card
                 id={videogame.id}
                 name= {videogame.name}
+                rating={videogame.rating}
+                genres={videogame.genres}
+                background_image={videogame.background_image}
                 />
             })}
         </div>
