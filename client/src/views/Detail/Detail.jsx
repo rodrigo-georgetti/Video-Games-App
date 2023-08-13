@@ -29,18 +29,19 @@ const videogame = useSelector(state=>state.videogame)
         <h2>Description: {videogame.description}</h2>
         <h2>Released: {videogame.released}</h2>
         <h2>Rating: {videogame.rating}</h2>
-        <h2>Genres: {videogame.genres.map((genre, index) => (
+        {videogame.genres && (<h2>Genres: {videogame.genres.map((genre, index) => (
       <span key={genre.id}>
         {genre.name}
         {index !== videogame.genres.length - 1 ? ', ' : ''}
       </span>
-    ))}</h2>
-    <h2>Platforms: {videogame.platforms.map((platforms, index) => (
+    ))}</h2>)}
+    
+    {videogame.platforms && (<h2>Platforms: {videogame.platforms.map((platforms, index) => (
       <span key={platforms.id}>
         {platforms.name}
         {index !== videogame.platforms.length - 1 ? ', ' : ''}
       </span>
-    ))}</h2>
+    ))}</h2>)}
         <img src={videogame.background_image} alt=""></img>
     </div>
    

@@ -1,8 +1,14 @@
 import axios from "axios"
 import { useState } from "react"
+import validate from "./validate"
+//import { useNavigate } from "react-router-dom";
 
 const Form = () =>{
-    
+//     const navigate = useNavigate();
+
+//   function handleBackClick() {
+//     navigate(-1);
+//   }
 	
 	
 	
@@ -12,7 +18,7 @@ const Form = () =>{
         description:"",
         background_image:"",
         released:"",
-        rating:"",
+        rating:0,
         genres:"",
         platforms:"",
     })
@@ -22,7 +28,7 @@ const Form = () =>{
         description:"",
         background_image:"",
         released:"",
-        rating:"",
+        rating:0,
         genres:"",
         platforms:"",
 
@@ -31,35 +37,50 @@ const Form = () =>{
 const changeHandler = (event)=>{
 const property = event.target.name
 const value = event.target.value
-validate({...form, [property]:value})
+setErrors(validate({...form, [property]:value}))
 setForm({...form, [property]:value})
 }
 
-const validate = (form)=>{
-if(form.name.length < 10){
-setErrors({...errors,name:""})
-} else{
-    setErrors({...errors,name:"nombre largo"})
-}
-}
+        
+
+
+// const validate = (form)=>{
+// if(form.name.length < 10){
+// setErrors({...errors,name:""})
+// } else{
+//     setErrors({...errors,name:"nombre largo"})
+// }
+// }
 
 const submitHandler = (event)=>{
 event.preventDefault()
-axios.post("http://localhost:3001/videogames", form)
+console.log(form)
+const newDog = {
+    name: form.name,
+    description: form.description,
+    background_image: form.background_image,
+    released: form.released,
+    rating: parseFloat(form.rating),
+    genres: form.genres,
+    platforms:form.platforms
+}
+axios.post("http://localhost:3001/videogames", newDog)
 .then(res=>alert(res))
 .catch(error=>alert(error))
 }
 
     return (
         <form onSubmit={submitHandler} >
+            {/* <button onClick={handleBackClick}>Go Back</button> */}
         <div> 
             <label>Name: </label>
             <input type="text" value={form.name} onChange={changeHandler} name="name" ></input>
-            <span>{errors.name}</span>
+            <span>{errors.name1 ? <p>{errors.name1}</p> : <p>{errors.name2}</p>}</span>
         </div>
         <div> 
             <label>Description: </label>
             <input type="text" value={form.description} onChange={changeHandler} name="description" ></input>
+            <span>{errors.description1 ? <p>{errors.description1}</p> : <p>{errors.description2}</p>}</span>
         </div>
         <div> 
             <label>Background_image: </label>
@@ -72,6 +93,7 @@ axios.post("http://localhost:3001/videogames", form)
         <div> 
             <label>Rating: </label>
             <input type="text" value={form.rating} onChange={changeHandler} name="rating" ></input>
+            <span>{errors.rating1 ? <p>{errors.rating1}</p> : <p>{errors.rating2}</p>}</span>
         </div>
         <div> 
             <label>Genres: </label>
