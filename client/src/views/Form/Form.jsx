@@ -1,6 +1,8 @@
 import axios from "axios"
-import { useState } from "react"
+import React ,{ useState } from "react"
 import validate from "./validate"
+
+
 //import { useNavigate } from "react-router-dom";
 
 const Form = () =>{
@@ -18,7 +20,7 @@ const Form = () =>{
         description:"",
         background_image:"",
         released:"",
-        rating:0,
+        rating:"",
         genres:"",
         platforms:"",
     })
@@ -28,7 +30,7 @@ const Form = () =>{
         description:"",
         background_image:"",
         released:"",
-        rating:0,
+        rating:"",
         genres:"",
         platforms:"",
 
@@ -41,16 +43,7 @@ setErrors(validate({...form, [property]:value}))
 setForm({...form, [property]:value})
 }
 
-        
 
-
-// const validate = (form)=>{
-// if(form.name.length < 10){
-// setErrors({...errors,name:""})
-// } else{
-//     setErrors({...errors,name:"nombre largo"})
-// }
-// }
 
 const submitHandler = (event)=>{
 event.preventDefault()
@@ -64,6 +57,8 @@ const newDog = {
     genres: form.genres,
     platforms:form.platforms
 }
+
+
 axios.post("http://localhost:3001/videogames", newDog)
 .then(res=>alert(res))
 .catch(error=>alert(error))
@@ -85,11 +80,17 @@ axios.post("http://localhost:3001/videogames", newDog)
         <div> 
             <label>Background_image: </label>
             <input type="text" value={form.background_image} onChange={changeHandler} name="background_image" ></input>
+            <span><p>{errors.background_image}</p></span>
         </div>
+        
         <div> 
             <label>Released: </label>
             <input type="text" value={form.released} onChange={changeHandler} name="released" ></input>
+            <span>{errors.released1 ? <p>{errors.released1}</p> : <p>{errors.released2}</p>}</span>
         </div>
+        
+
+
         <div> 
             <label>Rating: </label>
             <input type="text" value={form.rating} onChange={changeHandler} name="rating" ></input>
