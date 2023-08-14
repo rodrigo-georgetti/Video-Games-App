@@ -1,4 +1,4 @@
-import {  BASE_URL, GET_VIDEOGAMES, GET_VIDEOGAME_BY_ID, GET_GENRES, GET_PLATFORMS } from './helpers';
+import {  BASE_URL, GET_VIDEOGAMES, GET_VIDEOGAME_BY_ID, GET_GENRES, GET_PLATFORMS, GET_VIDEOGAMES_BY_NAME } from './helpers';
 import axios from 'axios'
 
 export const getVideogames = () => {
@@ -31,5 +31,19 @@ export const getGenres = () => {
         return async (dispatch) => {
             const platforms = (await axios.get(endpoint)).data
             return dispatch({ type: GET_PLATFORMS, payload: platforms })
+        };
+    };
+
+    export const getVideogameByName = (name) => {
+        const endpoint = `${BASE_URL}/videogames?name=${name}`;
+        return async (dispatch) => {
+            try {
+                const videogamesByName = (await axios.get(endpoint)).data;
+                
+                dispatch({ type: GET_VIDEOGAMES_BY_NAME, payload: videogamesByName });
+            } catch (error) {
+                alert(`${error.message}`);
+                alert(`${error.response.data.error}`); 
+            }
         };
     };
