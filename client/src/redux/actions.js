@@ -1,4 +1,4 @@
-import {  BASE_URL, GET_VIDEOGAMES, GET_VIDEOGAME_BY_ID, GET_GENRES, GET_PLATFORMS, GET_VIDEOGAMES_BY_NAME } from './helpers';
+import {  BASE_URL, GET_VIDEOGAMES, GET_VIDEOGAME_BY_ID, CLEAN_DETAIL,GET_GENRES, GET_PLATFORMS, GET_VIDEOGAMES_BY_NAME, FILTER_BY_ORIGIN, FILTER_BY_GENRES, ORDER_VIDEOGAMES } from './helpers';
 import axios from 'axios'
 
 export const getVideogames = () => {
@@ -17,6 +17,9 @@ export const getVideogameById = (id) => {
         const videogameById = (await axios.get(endpoint)).data
         return dispatch({ type: GET_VIDEOGAME_BY_ID, payload: videogameById });
     };
+};
+export const clean_detail = () => {
+    return ({ type: CLEAN_DETAIL, payload: {} })
 };
 export const getGenres = () => {
         const endpoint = `${BASE_URL}/genres`
@@ -47,3 +50,20 @@ export const getGenres = () => {
             }
         };
     };
+    export const filterByOrigin = (origin) => {
+        return (dispatch) => {
+            return dispatch({ type: FILTER_BY_ORIGIN, payload: origin })
+        }
+    };
+    
+    export const filterByGenres=(genre)=>{
+        return (dispatch)=>{
+            return dispatch({type: FILTER_BY_GENRES, payload: genre})
+        }
+    };
+    
+    export const orderVideogames = (order) => {
+        return (dispatch) => {
+            return dispatch({ type: ORDER_VIDEOGAMES, payload: order })
+        }
+    }

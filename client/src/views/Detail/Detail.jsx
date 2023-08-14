@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { useParams } from "react-router-dom"
 import { useNavigate } from "react-router-dom"
 import { useEffect } from "react"
-import { getVideogameById } from "../../redux/actions"
+import { getVideogameById , clean_detail} from "../../redux/actions"
 import style from './Detail.module.css'
 const Detail = () =>{
     const navigate = useNavigate();
@@ -15,6 +15,8 @@ const dispatch = useDispatch()
 
 
 useEffect(()=>{
+  dispatch(clean_detail())//me aseguro de limpiar siempre el componente al montarlo
+        
     dispatch(getVideogameById(id))
 }, [dispatch, id])
 
