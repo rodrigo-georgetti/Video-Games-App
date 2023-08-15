@@ -1,65 +1,51 @@
-.div{
-    
-        display: flex;
-        flex-direction: row;
-        gap: 5px;
-    
+.div {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
 }
 
 .order,
 .genres,
-.origin{
-    
-    top: 40px;
-    left: 50px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-    border-radius: 5px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    z-index: 1;
+.origin {
+  top: 40px;
+  left: 50px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  z-index: 1;
 }
-.order:hover
-.genres:hover
-.origin:hover {
-    background-color: #0056b3;
+.order:hover .genres:hover .origin:hover {
+  background-color: #0056b3;
 }
-
-
- /* Estilos para los elementos sin estilos definidos */
 
 .allVideogames,
 .apiVideogames,
 .dbVideogames {
-    /* Estilos para los contenedores de los diferentes tipos de juegos */
-    margin: 10px;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #0056b3;
-    
+  margin: 10px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #0056b3;
 }
 
 .genresOptions,
 .options {
-    /* Estilos para las opciones dentro del select */
-    font-size: 14px;
+  font-size: 14px;
 }
 
 .orderA,
 .orderD,
 .orderRatingA,
 .orderRatingD {
-    /* Estilos para las opciones de orden */
-    font-weight: bold;
+  font-weight: bold;
 }
-
-/* Aplicar estilos de hover similares */
 
 .allVideogames:hover,
 .apiVideogames:hover,
@@ -70,9 +56,5 @@
 .orderD:hover,
 .orderRatingA:hover,
 .orderRatingD:hover {
-    background-color: #eee;
-    
-    /* Otros estilos de hover similares a los elementos ya estilizados */
+  background-color: #eee;
 }
-
-  

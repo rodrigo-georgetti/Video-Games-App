@@ -1,7 +1,7 @@
 .backButton {
     position: absolute;
-    top: 40px; /* Posicionar el botón a 20px del borde superior */
-    left: 50px; /* Posicionar el botón a 20px del borde izquierdo */
+    top: 40px; 
+    left: 50px; 
     background-color: #007bff;
     color: white;
     border: none;
@@ -23,9 +23,9 @@
     padding-top: 350px;
     display: flex;
     flex-direction: column;
-    justify-content: center; /* Centrar horizontalmente */
-    align-items: center; /* Centrar verticalmente */
-    width: 100%; /* O el ancho deseado */
+    justify-content: center; 
+    align-items: center; 
+    width: 100%; 
     height: 100vh
 }
 
@@ -33,8 +33,7 @@
     padding-top: 650px;
     color: rgb(250, 134, 134);
     font-family: 'Press Start 2P', cursive;
-    font-size: 35px; /* Increased font size for the name */
-    
+    font-size: 35px;
 }
 
 .id,
