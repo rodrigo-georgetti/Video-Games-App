@@ -3,6 +3,7 @@ import { useEffect } from "react"
 import { useDispatch } from "react-redux"
 import { getVideogames } from "../../redux/actions"
 import { useNavigate } from "react-router-dom"
+import style from './Home.module.css'
 
 const Home = () =>{
     const navigate = useNavigate();
@@ -16,7 +17,7 @@ dispatch(getVideogames())
 },[dispatch])
 
     return (<>
-    <button onClick={handleBackClick}>Go Back</button>
+    <button className={style.backButton} onClick={handleBackClick}>Go Back</button>
     <CardsContainer/>
     </>
     )

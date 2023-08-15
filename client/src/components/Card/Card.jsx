@@ -5,14 +5,18 @@ const Card = (props) =>{
 const {id, name, rating, genres, background_image} = props
 
     return (
-        <NavLink to={`/detail/${id}`}>
+        
         <div className={style.card}>
-            <h1>NAME {name}</h1>
-            <h1>RATING {rating}</h1>
-            <p>Genres: {genres.map(genre => genre.name).join(', ')}</p>
+            <h1 className={style.name}>{name}</h1>
+            <h1 className={style.rating} >Rating: {rating}</h1>
+            <p className={style.genres} >Genres: {genres.map(genre => genre.name).join(', ')}</p>
+            <NavLink to={`/detail/${id}`}>
+            
             <img className={style.image} src={background_image} alt="" ></img>
+            
+            </NavLink>
         </div>
-        </NavLink>
+        
     )
 }
 export default Card

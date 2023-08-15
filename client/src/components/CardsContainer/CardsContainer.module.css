@@ -1,8 +1,12 @@
-.container{
-    border: 1px solid black;
+.container {
     display: flex;
     flex-direction: row;
+    justify-content: center; /* Centrado horizontal */
+    align-items: center; /* Centrado vertical */
+    border: 1px solid black;
     border-radius: 15px;
     flex-wrap: wrap;
-    gap: 1em;
+    gap: 3.5em;
+    margin-top: 70px;
+    margin-bottom: 70px;
 }
