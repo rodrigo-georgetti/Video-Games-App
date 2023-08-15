@@ -5,10 +5,12 @@ import FiltersBar from '../FiltersBar/FiltersBar'
 const NavBar = () =>{
     return (
         <div className={style.container}>
-<NavLink to="/home">HOME</NavLink>
-<SearchBar/>
-<FiltersBar/>
-<NavLink to="/create">FORM</NavLink>
+<NavLink  className={style.home} to="/home">HOME</NavLink>
+
+<NavLink className={style.form} to="/create">FORM</NavLink>
+<FiltersBar />
+<SearchBar />
+
 
         </div>
     )

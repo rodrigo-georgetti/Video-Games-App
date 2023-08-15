@@ -44,10 +44,11 @@ const CardsContainer = () =>{
             })}
         </div>
          {(videogamesRender.length > ITEMS_PER_PAGE) ? //renderizado condicional pedido en la presentacion
-         <div >
-             <label >Page: {currentPage}</label>
-             <button  onClick={handlePrevious}>PREVIOUS</button>
-             <button  onClick={handleNext}>NEXT</button>
+         <div className={style.divPage}>
+             
+             <button  className={style.previousButton} onClick={handlePrevious}>PREVIOUS</button>
+             <label  className={style.pageLabel} >Page: {currentPage}</label>
+             <button className={style.nextButton} onClick= {handleNext}>NEXT</button>
          </div> : <></>}
          </div>
     )

@@ -2,7 +2,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { orderVideogames, getGenres, filterByOrigin, filterByGenres } from "../../redux/actions";
 import { useEffect } from "react";
-
+import style from './FiltersBar.module.css'
 const FiltersBar = () => {
     const dispatch = useDispatch();
     
@@ -23,25 +23,25 @@ const FiltersBar = () => {
     
     const genres= useSelector(state=>state.genres);
     return (
-        <div >
-            <select  onChange={handleFilterOrigin}>
-                <option value="AllVideogames">All videogames</option>
-                <option value="ApiVideogames">API videogames</option>
-                <option value="DbVideogames">DB Videogames</option>
+        <div className={style.div}>
+            <select className={style.origin} onChange={handleFilterOrigin}>
+                <option className={style.allVideogames} value="AllVideogames">All videogames</option>
+                <option className={style.apiVideogames} value="ApiVideogames">API videogames</option>
+                <option className={style.dbVideogames} value="DbVideogames">DB Videogames</option>
             </select>
-            <select  onChange={handleFilterGenres}>
-            <option value="">Genres</option>       
+            <select className={style.genres} onChange={handleFilterGenres}>
+            <option className={style.genresOptions} value="">Genres</option>       
                 {genres.map((genre, index)=>(
-                    <option key={index} value={genre.name}>
+                    <option className={style.options} key={index} value={genre.name}>
                         {genre.name}
                     </option>
                 ))}
             </select>
-            <select  onChange={handleOrder}>
-                <option value="OrderAs">Order Asc. A-Z</option>
-                <option value="OrderD">Order Desc. Z-A</option>
-                <option value="OrderByRatingA">Order by Rating A</option>
-                <option value="OrderByRatingD">Order by Rating D</option>
+            <select className={style.order} onChange={handleOrder}>
+                <option className={style.orderA} value="OrderAs">Order Asc. A-Z</option>
+                <option className={style.orderD} value="OrderD">Order Desc. Z-A</option>
+                <option className={style.orderRatingA} value="OrderByRatingA">Order by Rating A</option>
+                <option className={style.orderRatingD} value="OrderByRatingD">Order by Rating D</option>
             </select>
             
         </div>
