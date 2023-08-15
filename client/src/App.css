@@ -1,10 +1,4 @@
 
-.background-container {
-  background-image: url('./assets/3226135.jpg');
-  background-size: cover; /* Ajusta el tamaño de la imagen para cubrir todo el elemento */
-  background-position: center; /* Posición centrada de la imagen de fondo */
-  /* Otros estilos y propiedades que desees */
-}
 
 .App {
   text-align: center;

@@ -7,7 +7,7 @@ function App() {
   const { pathname } = useLocation();
   return (
     <div className="App">
-      {pathname !== "/" && <NavBar/>}
+      {(pathname !== "/" ) && <NavBar/>}
       
       <Routes>
         
