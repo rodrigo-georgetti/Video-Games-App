@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom"
-
+import style from "./Landing.module.css"
 const Landing = () =>{
 const navigate = useNavigate()
 const access = ()=>{
@@ -7,10 +7,13 @@ const access = ()=>{
 }
 
 
-    return (<div>
-        <h1>Epic Plays</h1>
+    return (<div className={style.div}>
+        
+        <h1 className={style.title}>
+        Epic Plays <span id="colorSpan"></span>
+        </h1>
         {/* imagen de landing */}
-        <button onClick={access}>Start</button>
+        <button className={style.button}  onClick={access}>Start</button>
         </div>
     )
 }
