@@ -22,29 +22,31 @@ useEffect(()=>{
 
 const videogame = useSelector(state=>state.videogame)
 
-    return (<div>
+    return (<div >
         
-        <button onClick={handleBackClick}>Go Back</button>
-        <h1>DETAIL</h1>
-        <h2>ID: {videogame.id}</h2>
-        <h2>Name: {videogame.name}</h2>
-        <h2>Description: {videogame.description}</h2>
-        <h2>Released: {videogame.released}</h2>
-        <h2>Rating: {videogame.rating}</h2>
-        {videogame.genres && (<h2>Genres: {videogame.genres.map((genre, index) => (
+        <button className={style.backButton} onClick={handleBackClick}>Go Back</button>
+        <div className={style.elementsDiv}>
+        <h1 className={style.detail}>Videogame Detail</h1>
+        <h2 className={style.id}>ID: {videogame.id}</h2>
+        <h2 className={style.name}>Name: {videogame.name}</h2>
+        <h2 className={style.description}>Description: {videogame.description}</h2>
+        <h2 className={style.released}>Released: {videogame.released}</h2>
+        <h2 className={style.rating}>Rating: {videogame.rating}</h2>
+        {videogame.genres && (<h2 className={style.genres}>Genres: {videogame.genres.map((genre, index) => (
       <span key={genre.id}>
         {genre.name}
         {index !== videogame.genres.length - 1 ? ', ' : ''}
       </span>
     ))}</h2>)}
     
-    {videogame.platforms && (<h2>Platforms: {videogame.platforms.map((platforms, index) => (
+    {videogame.platforms && (<h2 className={style.platforms}>Platforms: {videogame.platforms.map((platforms, index) => (
       <span key={platforms.id}>
         {platforms.name}
         {index !== videogame.platforms.length - 1 ? ', ' : ''}
       </span>
     ))}</h2>)}
         <img className={style.image} src={videogame.background_image} alt=""></img>
+        </div>
     </div>
    
     )

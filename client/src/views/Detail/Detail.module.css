@@ -1,4 +1,56 @@
+.backButton {
+    position: absolute;
+    top: 40px; /* Posicionar el botón a 20px del borde superior */
+    left: 50px; /* Posicionar el botón a 20px del borde izquierdo */
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    z-index: 1;
+}
+
+.backButton:hover {
+    background-color: #0056b3;
+}
+
+.elementsDiv{
+    padding-top: 350px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centrar horizontalmente */
+    align-items: center; /* Centrar verticalmente */
+    width: 100%; /* O el ancho deseado */
+    height: 100vh
+}
+
+.detail{
+    padding-top: 650px;
+    color: rgb(250, 134, 134);
+    font-family: 'Press Start 2P', cursive;
+    font-size: 35px; /* Increased font size for the name */
+    
+}
+
+.id,
+.name,
+.description,
+.released,
+.rating,
+.genres,
+.platforms{
+    color: rgb(250, 134, 134);
+    font-family: 'Press Start 2P', cursive;
+    font-size: 25px;
+}
+
 .image{
-    width: 400px;
-    height: 300px;
+    width: 1200px;
+    height: 900px;
+    padding-bottom: 50px;
 }

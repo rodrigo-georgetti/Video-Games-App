@@ -5,7 +5,7 @@ import { useDispatch, useSelector} from "react-redux"
 
 import { getGenres, getPlatforms } from "../../redux/actions"
 
-
+import style from './Form.module.css'
 
 
 const Form = () =>{
@@ -86,65 +86,72 @@ const genres = useSelector(state => state.genres)//array con todos los temperame
 const platforms = useSelector(state => state.platforms)
 
     return (
-        <form onSubmit={SubmitHandler} >
+        <form className={style.form} onSubmit={SubmitHandler} >
             {/* <button onClick={handleBackClick}>Go Back</button> */}
-        <div> 
-            <label>Name: </label>
-            <input type="text" value={form.name} onChange={changeHandler} name="name" ></input>
-            <span>{errors.name1 ? <p>{errors.name1}</p> : <p>{errors.name2}</p>}</span>
+        <div className={style.divName}>  
+            <label className={style.labelName} >Name: </label>
+            <input className={style.inputName} type="text" value={form.name} onChange={changeHandler} name="name" ></input>
+            <span className={style.errorName}>{errors.name1 ? <p>{errors.name1}</p> : <p>{errors.name2}</p>}</span>
         </div>
-        <div> 
-            <label>Description: </label>
-            <input type="text" value={form.description} onChange={changeHandler} name="description" ></input>
-            <span>{errors.description1 ? <p>{errors.description1}</p> : <p>{errors.description2}</p>}</span>
+        <div className={style.divDescription}> 
+            <label className={style.labelDescription}>Description: </label>
+            <textarea
+    className={style.inputDescription}
+    value={form.description}
+    onChange={changeHandler}
+    name="description"
+    rows="6" // Establece el número de filas iniciales
+  />
+            <span classname={style.errorDescription}>{errors.description1 ? <p>{errors.description1}</p> : <p>{errors.description2}</p>}</span>
         </div>
-        <div> 
-            <label>Background_image: </label>
-            <input type="text" value={form.background_image} onChange={changeHandler} name="background_image" ></input>
-            <span><p>{errors.background_image}</p></span>
+        <div className={style.divImage}> 
+            <label className={style.labelImage}>Background_image: </label>
+            <input className={style.inputImage} type="text" value={form.background_image} onChange={changeHandler} name="background_image" ></input>
+            <span className={style.errorImage}><p>{errors.background_image}</p></span>
         </div>
         
-        <div> 
-            <label>Released: </label>
-            <input type="text" value={form.released} onChange={changeHandler} name="released" ></input>
-            <span>{errors.released1 ? <p>{errors.released1}</p> : <p>{errors.released2}</p>}</span>
+        <div className={style.divReleased}>  
+            <label className={style.labelReleased}>Released: </label>
+            <input className={style.inputReleased} type="text" value={form.released} onChange={changeHandler} name="released" ></input>
+            <span className={style.errorReleased}>{errors.released1 ? <p>{errors.released1}</p> : <p>{errors.released2}</p>}</span>
         </div>
         
 
 
-        <div> 
-            <label>Rating: </label>
-            <input type="text" value={form.rating} onChange={changeHandler} name="rating" ></input>
-            <span>{errors.rating1 ? <p>{errors.rating1}</p> : <p>{errors.rating2}</p>}</span>
+        <div className={style.divRating}> 
+            <label className={style.labelRating}>Rating: </label>
+            <input className={style.inputRating} type="text" value={form.rating} onChange={changeHandler} name="rating" ></input>
+            <span className={style.errorRating}>{errors.rating1 ? <p>{errors.rating1}</p> : <p>{errors.rating2}</p>}</span>
         </div>
         <div>
-        <select multiple value={selectedGenres} onChange={handleGenresChange}>
+        <select className={style.genres} multiple value={selectedGenres} onChange={handleGenresChange}>
     {genres && genres.map((genre, index) => (
         <option key={index} value={genre.name}>
             {genre.name}
         </option>
     ))}
 </select>
-            <p>SELECTED GENRES: {selectedGenres.join(', ')}</p>
+</div>
+<div>
+            <p className={style.selectedGenres}>SELECTED GENRES: {selectedGenres.join(', ')}</p>
             </div>
         
             <div>
-        <select multiple value={selectedPlatforms} onChange={handlePlatformsChange}>
+        <select className={style.platforms} multiple value={selectedPlatforms} onChange={handlePlatformsChange}>
     {platforms && platforms.map((platform, index) => (
         <option key={index} value={platform.name}>
             {platform.name}
         </option>
     ))}
 </select>
-            <p>SELECTED PLATFORMS: {selectedPlatforms.join(', ')}</p>
+</div>
+<div>
+            <p className={style.selectedPlatforms}>SELECTED PLATFORMS: {selectedPlatforms.join(', ')}</p>
             </div>
         
 
-        {/* <div> 
-            <label>Platforms: </label>
-            <input type="text" value={form.platforms} onChange={changeHandler} name="platforms" ></input>
-        </div> */}
-        <button type="submit" >SUBMIT</button>
+        
+        <button className={style.submitButton} type="submit" >SUBMIT</button>
         </form>
     )
 }
