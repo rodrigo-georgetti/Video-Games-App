@@ -1,8 +1,8 @@
-const { Router } = require('express');
+const { Router } = require("express");
 
-const {getPlatformsHandler} = require('../handlers/platformsHandlers')
-const platformsRouter = Router()
+const { getPlatformsHandler } = require("../handlers/platformsHandlers");
+const platformsRouter = Router();
 
-platformsRouter.get("/", getPlatformsHandler)
+platformsRouter.get("/", getPlatformsHandler);
 
-  module.exports = platformsRouter
+module.exports = platformsRouter;

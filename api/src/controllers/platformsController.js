@@ -1,19 +1,21 @@
-const { Platforms } = require('../db');
-const axios = require('axios');
+const { Platforms } = require("../db");
+const axios = require("axios");
 const { API_KEY } = process.env;
-const { URL_VIDEOGAMES } = require('../helpers/urlHelpers');
+const { URL_VIDEOGAMES } = require("../helpers/urlHelpers");
 
 const getAllPlatforms = async () => {
-  if (await Platforms.count() === 0) {
+  if ((await Platforms.count()) === 0) {
     const allGames = [];
     const totalPages = 150;
     const pageSize = 40;
     const apiRequests = [];
-
     for (let pageNumber = 50; pageNumber <= totalPages; pageNumber++) {
-      apiRequests.push(axios.get(`${URL_VIDEOGAMES}?key=${API_KEY}&page=${pageNumber}&page_size=${pageSize}`));
+      apiRequests.push(
+        axios.get(
+          `${URL_VIDEOGAMES}?key=${API_KEY}&page=${pageNumber}&page_size=${pageSize}`
+        )
+      );
     }
-
     try {
       const responses = await Promise.all(apiRequests);
       responses.forEach((response) => {
@@ -21,28 +23,25 @@ const getAllPlatforms = async () => {
         allGames.push(...gamesOnPage);
       });
     } catch (error) {
-      console.error('Error fetching data:', error.message);
+      console.error("Error fetching data:", error.message);
     }
-
     const platformsAuxArray = [];
     allGames.forEach((element) => {
       element.platforms.forEach((object) => {
         platformsAuxArray.push({ name: object.platform.name });
       });
     });
-
-    const allPlatforms = [...new Set(platformsAuxArray.map((element) => JSON.stringify(element)))].map((object) => JSON.parse(object));
-    
+    const allPlatforms = [
+      ...new Set(platformsAuxArray.map((element) => JSON.stringify(element))),
+    ].map((object) => JSON.parse(object));
     await Platforms.bulkCreate(allPlatforms);
-    
     const platformNames = await Platforms.findAll({
-      attributes: ['name']
+      attributes: ["name"],
     });
-
     return platformNames;
   } else {
     const platformsQuery = await Platforms.findAll({
-      attributes: ['name']
+      attributes: ["name"],
     });
     return platformsQuery;
   }

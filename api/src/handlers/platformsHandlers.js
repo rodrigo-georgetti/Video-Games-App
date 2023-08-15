@@ -1,12 +1,11 @@
-const {getAllPlatforms} = require('../controllers/platformsController')
+const { getAllPlatforms } = require("../controllers/platformsController");
 
-const getPlatformsHandler = async(req, res)=>{
-
+const getPlatformsHandler = async (req, res) => {
   try {
-    const allPlatforms = await getAllPlatforms()
-    res.status(200).json(allPlatforms)
+    const allPlatforms = await getAllPlatforms();
+    res.status(200).json(allPlatforms);
   } catch (error) {
-    res.status(400).json({error:error.message})
+    res.status(400).json({ error: error.message });
   }
-}
-  module.exports = {getPlatformsHandler}
+};
+module.exports = { getPlatformsHandler };

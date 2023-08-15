@@ -1,5 +1,5 @@
-const VIDEOGAMES = '/videogames'
-const GENRES = '/genres'
-const PLATFORMS = '/platforms'
+const VIDEOGAMES = "/videogames";
+const GENRES = "/genres";
+const PLATFORMS = "/platforms";
 
-module.exports = {VIDEOGAMES,GENRES,PLATFORMS}
+module.exports = { VIDEOGAMES, GENRES, PLATFORMS };
